@@ -82,7 +82,7 @@ export default function Home() {
               <div className="df fdc aie">
                 <span>${price}</span>
                 <span
-                  style={{ color: "red", cursor: "pointer" }}
+                  className="fas fa-trash icon"
                   onClick={() => {
                     fetch(
                       `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/${_id}`,
@@ -91,14 +91,13 @@ export default function Home() {
                       .then((res) => res.json())
                       .then((data) => console.log(data));
                   }}
-                >
-                  Borrar
-                </span>
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
+
       <style jsx>
         {`
           form {
@@ -163,9 +162,15 @@ export default function Home() {
             cursor: pointer;
           }
 
+          button:hover {
+            background-color: lightgrey;
+          }
+
           h2 {
             text-align: center;
+            text-decoration: underline;
             margin: 0.3rem;
+            margin-bottom: 1rem;
           }
 
           .products-container {
@@ -183,6 +188,12 @@ export default function Home() {
             margin-top: 5rem;
             border-radius: 0.5rem;
             padding: 1rem;
+          }
+
+          .icon {
+            cursor: pointer;
+            color: rgba(214, 43, 43, 1);
+            margin-top: 0.5rem;
           }
         `}
       </style>
