@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function Home() {
-  const initialState = { name: "", price: 0 };
+const initialProductState = { name: "", price: 0 };
+const initialMovementState = { type: "Compra", quantity: 0 };
 
-  const [product, setProduct] = useState(initialState);
+export default function Home() {
+  const [product, setProduct] = useState(initialProductState);
+  const [selectedProductId, setSelectedProductId] = useState();
+  const [movement, setMovement] = useState(initialMovementState);
   const [products, setProducts] = useState([]);
 
   const handleChange = (e) => {
@@ -16,7 +19,20 @@ export default function Home() {
     });
   };
 
-  const handleClick = async (e) => {
+  const handleMovementChange = (e) => {
+    const inputValue = e.target.value;
+
+    setMovement({
+      ...movement,
+      quantity: +inputValue,
+    });
+  };
+
+  const handleSelectType = (type) => {
+    setMovement({ ...movement, type });
+  };
+
+  const handleCreateProduct = async (e) => {
     e.preventDefault();
 
     try {
@@ -31,9 +47,33 @@ export default function Home() {
         }
       );
       const data = await res.json();
-      setProduct(initialState);
+      setProduct(initialProductState);
       const newProducts = [data.product, ...products];
       setProducts(newProducts);
+      //fetchProducts();
+    } catch ({ error }) {
+      console.log(error);
+    }
+  };
+
+  const handleCreateMovement = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/products/movement/${selectedProductId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(movement),
+        }
+      );
+      const data = await res.json();
+      console.log({ data });
+      setMovement(initialMovementState);
+      setSelectedProductId(null);
       //fetchProducts();
     } catch ({ error }) {
       console.log(error);
@@ -72,12 +112,46 @@ export default function Home() {
               placeholder="Precio del producto"
               onChange={handleChange}
             />
-            <button onClick={handleClick}>Crear producto</button>
+            <button onClick={handleCreateProduct}>Crear producto</button>
           </form>
+
+          <h2>Crear movimiento</h2>
+          <div className="df aic mb5">
+            {["Compra", "Venta"].map((type) => (
+              <div
+                onClick={() => handleSelectType(type)}
+                className="mr5 p5 shadow br5 cursorp"
+                key={type}
+                style={{
+                  backgroundColor:
+                    type === movement.type ? "lightblue" : "white",
+                }}
+              >
+                <span>{type}</span>
+              </div>
+            ))}
+          </div>
+
+          <input
+            type="number"
+            name="quantity"
+            value={movement.quantity}
+            placeholder="Cantidad del producto"
+            onChange={handleMovementChange}
+          />
+          <button onClick={handleCreateMovement}>Crear movimiento</button>
         </div>
         <div className="products-container">
           {products.map(({ _id, name, price }) => (
-            <div className="product df aic jcsb p5 mb5 br5" key={_id}>
+            <div
+              onClick={() => setSelectedProductId(_id)}
+              className="shadow df aic jcsb p5 mb5 br5"
+              style={{
+                backgroundColor:
+                  selectedProductId === _id ? "lightblue" : "white",
+              }}
+              key={_id}
+            >
               <span>{name}</span>
               <div className="df fdc aie">
                 <span>${price}</span>
@@ -115,6 +189,10 @@ export default function Home() {
             padding: 0.5rem;
           }
 
+          .mr5 {
+            margin-right: 0.5rem;
+          }
+
           .br5 {
             border-radius: 0.5rem;
           }
@@ -123,7 +201,7 @@ export default function Home() {
             margin-bottom: 0.5rem;
           }
 
-          .product {
+          .shadow {
             box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
           }
 
@@ -145,6 +223,10 @@ export default function Home() {
 
           .fdc {
             flex-direction: column;
+          }
+
+          .cursorp {
+            cursor: pointer;
           }
 
           input {
