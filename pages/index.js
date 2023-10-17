@@ -74,7 +74,7 @@ export default function Home() {
       console.log({ data });
       setMovement(initialMovementState);
       setSelectedProductId(null);
-      //fetchProducts();
+      fetchProducts();
     } catch ({ error }) {
       console.log(error);
     }
@@ -142,7 +142,7 @@ export default function Home() {
           <button onClick={handleCreateMovement}>Crear movimiento</button>
         </div>
         <div className="products-container">
-          {products.map(({ _id, name, price }) => (
+          {products.map(({ _id, name, price, stock }) => (
             <div
               onClick={() => setSelectedProductId(_id)}
               className="shadow df aic jcsb p5 mb5 br5"
@@ -154,7 +154,10 @@ export default function Home() {
             >
               <span>{name}</span>
               <div className="df fdc aie">
-                <span>${price}</span>
+                <div className="df fdc">
+                  <span>${price}</span>
+                  <span>Stock: {stock}</span>
+                </div>
                 <span
                   className="fas fa-trash icon"
                   onClick={() => {
