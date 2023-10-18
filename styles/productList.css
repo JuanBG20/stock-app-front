@@ -1,0 +1,31 @@
+.productsContainer {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 40rem;
+  max-width: 50rem;
+  width: 80%;
+  padding: 1rem;
+}
+
+.dataContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.numberData {
+  display: flex;
+}
+
+.data {
+  margin-right: 1rem;
+}
