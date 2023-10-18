@@ -9,10 +9,10 @@ export default function ProductList({ baseURL, products }) {
 
   return (
     <>
-      <div className="container">
+      <div className="container containerResponsive">
         <h1>Lista de productos</h1>
 
-        <div className="productsContainer">
+        <div className="productsContainer productResponsive">
           {products.map(({ _id, name, price, stock }) => (
             <div className="dataContainer" key={_id}>
               <span>{name}</span>

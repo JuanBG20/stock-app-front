@@ -37,7 +37,7 @@ export default function NewProduct({ baseURL, products, setProducts }) {
 
   return (
     <>
-      <div className="container">
+      <div className="container containerResponsive">
         <h1>Crear nuevo producto</h1>
 
         <form>

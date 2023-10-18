@@ -46,7 +46,7 @@ export default function NewMovement({ baseURL, products }) {
 
   return (
     <>
-      <div className="container">
+      <div className="container containerResponsive">
         <h1>Crear nuevo movimiento</h1>
 
         <form>

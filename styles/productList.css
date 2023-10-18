@@ -1,15 +1,11 @@
 .productsContainer {
   display: flex;
   flex-direction: column;
-  margin: auto;
   background-color: white;
-  border-radius: 0.5rem;
   overflow: hidden;
   overflow-y: auto;
-  max-height: 40rem;
-  max-width: 50rem;
-  width: 80%;
-  padding: 1rem;
+  max-height: 25rem;
+  width: 100%;
 }
 
 .dataContainer {
@@ -28,4 +24,19 @@
 
 .data {
   margin-right: 1rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .productResponsive {
+    padding: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  .productResponsive {
+    margin: auto;
+    border-radius: 0.5rem;
+    max-width: 50rem;
+    padding: 1rem;
+  }
 }
