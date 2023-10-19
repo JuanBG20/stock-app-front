@@ -53,7 +53,7 @@ export default function NewMovement({ baseURL, products }) {
           <div>
             <label htmlFor="selectId">Producto: </label>
             <select onChange={handleIdChange} name="selectId">
-              {products.map(({ _id, name }) => (
+              {products?.map(({ _id, name }) => (
                 <option key={_id} value={name}>
                   {name}
                 </option>

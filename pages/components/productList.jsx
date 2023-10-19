@@ -13,7 +13,7 @@ export default function ProductList({ baseURL, products }) {
         <h1>Lista de productos</h1>
 
         <div className="productsContainer productResponsive">
-          {products.map(({ _id, name, price, stock }) => (
+          {products?.map(({ _id, name, price, stock }) => (
             <div className="dataContainer" key={_id}>
               <span>{name}</span>
               <div className="numberData">
