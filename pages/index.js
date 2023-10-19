@@ -15,7 +15,7 @@ export default function Home() {
     fetchProducts(baseURL, products, setProducts);
 
     setFetchingProducts(false);
-  }, [fetchingProducts, products]);
+  }, [fetchingProducts]);
 
   const handleClick = (component) => {
     setActiveComponent(component);

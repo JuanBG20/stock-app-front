@@ -1,3 +1,6 @@
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function ProductList({ baseURL, products }) {
   const handleDelete = (_id) => {
     fetch(`${baseURL}/products/${_id}`, { method: "DELETE" })
@@ -20,11 +23,16 @@ export default function ProductList({ baseURL, products }) {
                 <span className="data">${price}</span>
                 <span className="data">Stock: {stock}</span>
                 <div>
-                  <span
-                    onClick={() => handleDelete(_id)}
-                    className="fas fa-trash  icon"
-                  />
-                  <span className="fa-solid fa-pen-to-square icon" />
+                  <span className="spanFirstIcon">
+                    <FontAwesomeIcon
+                      onClick={() => handleDelete(_id)}
+                      icon={faTrash}
+                      className="icon"
+                    />
+                  </span>
+                  <span>
+                    <FontAwesomeIcon icon={faPenToSquare} className="icon" />
+                  </span>
                 </div>
               </div>
             </div>

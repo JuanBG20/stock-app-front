@@ -63,7 +63,7 @@ button:hover {
   cursor: pointer;
 }
 
-.icon::before {
+.spanFirstIcon .icon {
   margin-right: 0.5rem;
 }
 
